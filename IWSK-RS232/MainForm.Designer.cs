@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gro = new System.Windows.Forms.GroupBox();
+            this.pingButton = new System.Windows.Forms.Button();
+            this.rescanPortsButton = new System.Windows.Forms.Button();
             this.connectButton = new System.Windows.Forms.Button();
             this.flowControlComboBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -42,45 +44,44 @@
             this.label1 = new System.Windows.Forms.Label();
             this.baudRateComboBox = new System.Windows.Forms.ComboBox();
             this.portComboBox = new System.Windows.Forms.ComboBox();
-            this.rescanPortsButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.terminatorTextBox = new System.Windows.Forms.TextBox();
             this.setTerminatorButton = new System.Windows.Forms.Button();
-            this.pingButton = new System.Windows.Forms.Button();
+            this.terminatorTextBox = new System.Windows.Forms.TextBox();
             this.leftPanel = new System.Windows.Forms.Panel();
-            this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.decReadRadioButton = new System.Windows.Forms.RadioButton();
             this.asciiReadRadioButton = new System.Windows.Forms.RadioButton();
             this.hexReadradioButton = new System.Windows.Forms.RadioButton();
-            this.decReadRadioButton = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.sendTextBox = new System.Windows.Forms.TextBox();
-            this.sendButton = new System.Windows.Forms.Button();
+            this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.readSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.writeSplitContainer = new System.Windows.Forms.SplitContainer();
             this.readRawDataRichTextBox = new System.Windows.Forms.RichTextBox();
             this.readFrameListBox = new System.Windows.Forms.ListBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.writeSplitContainer = new System.Windows.Forms.SplitContainer();
             this.writeRawDataRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.delTextCheckBox = new System.Windows.Forms.CheckBox();
+            this.sendTextBox = new System.Windows.Forms.TextBox();
+            this.sendButton = new System.Windows.Forms.Button();
             this.gro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.leftPanel.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
             this.mainSplitContainer.Panel1.SuspendLayout();
             this.mainSplitContainer.Panel2.SuspendLayout();
             this.mainSplitContainer.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.readSplitContainer)).BeginInit();
             this.readSplitContainer.Panel1.SuspendLayout();
             this.readSplitContainer.Panel2.SuspendLayout();
             this.readSplitContainer.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.writeSplitContainer)).BeginInit();
             this.writeSplitContainer.Panel1.SuspendLayout();
             this.writeSplitContainer.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gro
@@ -107,6 +108,25 @@
             this.gro.TabStop = false;
             this.gro.Text = "Konfiguracja połączenia";
             // 
+            // pingButton
+            // 
+            this.pingButton.Location = new System.Drawing.Point(6, 215);
+            this.pingButton.Name = "pingButton";
+            this.pingButton.Size = new System.Drawing.Size(201, 23);
+            this.pingButton.TabIndex = 2;
+            this.pingButton.Text = "PING";
+            this.pingButton.UseVisualStyleBackColor = true;
+            // 
+            // rescanPortsButton
+            // 
+            this.rescanPortsButton.Location = new System.Drawing.Point(152, 15);
+            this.rescanPortsButton.Name = "rescanPortsButton";
+            this.rescanPortsButton.Size = new System.Drawing.Size(55, 23);
+            this.rescanPortsButton.TabIndex = 13;
+            this.rescanPortsButton.Text = "Skanuj";
+            this.rescanPortsButton.UseVisualStyleBackColor = true;
+            this.rescanPortsButton.Click += new System.EventHandler(this.rescanPortsButton_Click);
+            // 
             // connectButton
             // 
             this.connectButton.Location = new System.Drawing.Point(6, 187);
@@ -115,6 +135,7 @@
             this.connectButton.TabIndex = 12;
             this.connectButton.Text = "Połącz";
             this.connectButton.UseVisualStyleBackColor = true;
+            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
             // flowControlComboBox
             // 
@@ -253,16 +274,6 @@
             this.portComboBox.Size = new System.Drawing.Size(65, 21);
             this.portComboBox.TabIndex = 0;
             // 
-            // rescanPortsButton
-            // 
-            this.rescanPortsButton.Location = new System.Drawing.Point(152, 15);
-            this.rescanPortsButton.Name = "rescanPortsButton";
-            this.rescanPortsButton.Size = new System.Drawing.Size(55, 23);
-            this.rescanPortsButton.TabIndex = 13;
-            this.rescanPortsButton.Text = "Skanuj";
-            this.rescanPortsButton.UseVisualStyleBackColor = true;
-            this.rescanPortsButton.Click += new System.EventHandler(this.rescanPortsButton_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.setTerminatorButton);
@@ -274,13 +285,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Terminator";
             // 
-            // terminatorTextBox
-            // 
-            this.terminatorTextBox.Location = new System.Drawing.Point(6, 22);
-            this.terminatorTextBox.Name = "terminatorTextBox";
-            this.terminatorTextBox.Size = new System.Drawing.Size(114, 20);
-            this.terminatorTextBox.TabIndex = 0;
-            // 
             // setTerminatorButton
             // 
             this.setTerminatorButton.Location = new System.Drawing.Point(124, 22);
@@ -290,14 +294,12 @@
             this.setTerminatorButton.Text = "Ustaw";
             this.setTerminatorButton.UseVisualStyleBackColor = true;
             // 
-            // pingButton
+            // terminatorTextBox
             // 
-            this.pingButton.Location = new System.Drawing.Point(6, 215);
-            this.pingButton.Name = "pingButton";
-            this.pingButton.Size = new System.Drawing.Size(201, 23);
-            this.pingButton.TabIndex = 2;
-            this.pingButton.Text = "PING";
-            this.pingButton.UseVisualStyleBackColor = true;
+            this.terminatorTextBox.Location = new System.Drawing.Point(6, 22);
+            this.terminatorTextBox.Name = "terminatorTextBox";
+            this.terminatorTextBox.Size = new System.Drawing.Size(114, 20);
+            this.terminatorTextBox.TabIndex = 0;
             // 
             // leftPanel
             // 
@@ -309,6 +311,50 @@
             this.leftPanel.Name = "leftPanel";
             this.leftPanel.Size = new System.Drawing.Size(218, 441);
             this.leftPanel.TabIndex = 2;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.decReadRadioButton);
+            this.groupBox4.Controls.Add(this.asciiReadRadioButton);
+            this.groupBox4.Controls.Add(this.hexReadradioButton);
+            this.groupBox4.Location = new System.Drawing.Point(3, 315);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(207, 40);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Wyświetlanie danych";
+            // 
+            // decReadRadioButton
+            // 
+            this.decReadRadioButton.AutoSize = true;
+            this.decReadRadioButton.Location = new System.Drawing.Point(86, 17);
+            this.decReadRadioButton.Name = "decReadRadioButton";
+            this.decReadRadioButton.Size = new System.Drawing.Size(47, 17);
+            this.decReadRadioButton.TabIndex = 2;
+            this.decReadRadioButton.Text = "DEC";
+            this.decReadRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // asciiReadRadioButton
+            // 
+            this.asciiReadRadioButton.AutoSize = true;
+            this.asciiReadRadioButton.Checked = true;
+            this.asciiReadRadioButton.Location = new System.Drawing.Point(11, 17);
+            this.asciiReadRadioButton.Name = "asciiReadRadioButton";
+            this.asciiReadRadioButton.Size = new System.Drawing.Size(52, 17);
+            this.asciiReadRadioButton.TabIndex = 0;
+            this.asciiReadRadioButton.TabStop = true;
+            this.asciiReadRadioButton.Text = "ASCII";
+            this.asciiReadRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // hexReadradioButton
+            // 
+            this.hexReadradioButton.AutoSize = true;
+            this.hexReadradioButton.Location = new System.Drawing.Point(152, 17);
+            this.hexReadradioButton.Name = "hexReadradioButton";
+            this.hexReadradioButton.Size = new System.Drawing.Size(47, 17);
+            this.hexReadradioButton.TabIndex = 1;
+            this.hexReadradioButton.Text = "HEX";
+            this.hexReadradioButton.UseVisualStyleBackColor = true;
             // 
             // mainSplitContainer
             // 
@@ -339,90 +385,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Odbiór danych";
             // 
-            // asciiReadRadioButton
-            // 
-            this.asciiReadRadioButton.AutoSize = true;
-            this.asciiReadRadioButton.Checked = true;
-            this.asciiReadRadioButton.Location = new System.Drawing.Point(11, 17);
-            this.asciiReadRadioButton.Name = "asciiReadRadioButton";
-            this.asciiReadRadioButton.Size = new System.Drawing.Size(52, 17);
-            this.asciiReadRadioButton.TabIndex = 0;
-            this.asciiReadRadioButton.TabStop = true;
-            this.asciiReadRadioButton.Text = "ASCII";
-            this.asciiReadRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // hexReadradioButton
-            // 
-            this.hexReadradioButton.AutoSize = true;
-            this.hexReadradioButton.Location = new System.Drawing.Point(152, 17);
-            this.hexReadradioButton.Name = "hexReadradioButton";
-            this.hexReadradioButton.Size = new System.Drawing.Size(47, 17);
-            this.hexReadradioButton.TabIndex = 1;
-            this.hexReadradioButton.Text = "HEX";
-            this.hexReadradioButton.UseVisualStyleBackColor = true;
-            // 
-            // decReadRadioButton
-            // 
-            this.decReadRadioButton.AutoSize = true;
-            this.decReadRadioButton.Location = new System.Drawing.Point(86, 17);
-            this.decReadRadioButton.Name = "decReadRadioButton";
-            this.decReadRadioButton.Size = new System.Drawing.Size(47, 17);
-            this.decReadRadioButton.TabIndex = 2;
-            this.decReadRadioButton.Text = "DEC";
-            this.decReadRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.writeSplitContainer);
-            this.groupBox3.Controls.Add(this.panel1);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(543, 209);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Wysyłanie danych";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.decReadRadioButton);
-            this.groupBox4.Controls.Add(this.asciiReadRadioButton);
-            this.groupBox4.Controls.Add(this.hexReadradioButton);
-            this.groupBox4.Location = new System.Drawing.Point(3, 315);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(207, 40);
-            this.groupBox4.TabIndex = 2;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Wyświetlanie danych";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.sendTextBox);
-            this.panel1.Controls.Add(this.sendButton);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 184);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(537, 22);
-            this.panel1.TabIndex = 0;
-            // 
-            // sendTextBox
-            // 
-            this.sendTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sendTextBox.Location = new System.Drawing.Point(0, 0);
-            this.sendTextBox.Name = "sendTextBox";
-            this.sendTextBox.Size = new System.Drawing.Size(462, 20);
-            this.sendTextBox.TabIndex = 0;
-            // 
-            // sendButton
-            // 
-            this.sendButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.sendButton.Location = new System.Drawing.Point(462, 0);
-            this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(75, 22);
-            this.sendButton.TabIndex = 1;
-            this.sendButton.Text = "Wyślij";
-            this.sendButton.UseVisualStyleBackColor = true;
-            // 
             // readSplitContainer
             // 
             this.readSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -440,25 +402,12 @@
             this.readSplitContainer.SplitterDistance = 264;
             this.readSplitContainer.TabIndex = 0;
             // 
-            // writeSplitContainer
-            // 
-            this.writeSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.writeSplitContainer.Location = new System.Drawing.Point(3, 16);
-            this.writeSplitContainer.Name = "writeSplitContainer";
-            // 
-            // writeSplitContainer.Panel1
-            // 
-            this.writeSplitContainer.Panel1.Controls.Add(this.writeRawDataRichTextBox);
-            this.writeSplitContainer.Size = new System.Drawing.Size(537, 168);
-            this.writeSplitContainer.SplitterDistance = 267;
-            this.writeSplitContainer.TabIndex = 1;
-            // 
             // readRawDataRichTextBox
             // 
             this.readRawDataRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.readRawDataRichTextBox.Enabled = false;
             this.readRawDataRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.readRawDataRichTextBox.Name = "readRawDataRichTextBox";
+            this.readRawDataRichTextBox.ReadOnly = true;
             this.readRawDataRichTextBox.Size = new System.Drawing.Size(264, 209);
             this.readRawDataRichTextBox.TabIndex = 0;
             this.readRawDataRichTextBox.Text = "";
@@ -472,15 +421,82 @@
             this.readFrameListBox.Size = new System.Drawing.Size(269, 209);
             this.readFrameListBox.TabIndex = 0;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.writeSplitContainer);
+            this.groupBox3.Controls.Add(this.panel1);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(543, 209);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Wysyłanie danych";
+            // 
+            // writeSplitContainer
+            // 
+            this.writeSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.writeSplitContainer.Location = new System.Drawing.Point(3, 16);
+            this.writeSplitContainer.Name = "writeSplitContainer";
+            // 
+            // writeSplitContainer.Panel1
+            // 
+            this.writeSplitContainer.Panel1.Controls.Add(this.writeRawDataRichTextBox);
+            this.writeSplitContainer.Size = new System.Drawing.Size(537, 168);
+            this.writeSplitContainer.SplitterDistance = 267;
+            this.writeSplitContainer.TabIndex = 1;
+            // 
             // writeRawDataRichTextBox
             // 
             this.writeRawDataRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.writeRawDataRichTextBox.Enabled = false;
             this.writeRawDataRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.writeRawDataRichTextBox.Name = "writeRawDataRichTextBox";
+            this.writeRawDataRichTextBox.ReadOnly = true;
             this.writeRawDataRichTextBox.Size = new System.Drawing.Size(267, 168);
             this.writeRawDataRichTextBox.TabIndex = 1;
             this.writeRawDataRichTextBox.Text = "";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.delTextCheckBox);
+            this.panel1.Controls.Add(this.sendTextBox);
+            this.panel1.Controls.Add(this.sendButton);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(3, 184);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(537, 22);
+            this.panel1.TabIndex = 0;
+            // 
+            // delTextCheckBox
+            // 
+            this.delTextCheckBox.AutoSize = true;
+            this.delTextCheckBox.Checked = true;
+            this.delTextCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.delTextCheckBox.Location = new System.Drawing.Point(327, 3);
+            this.delTextCheckBox.Name = "delTextCheckBox";
+            this.delTextCheckBox.Size = new System.Drawing.Size(129, 17);
+            this.delTextCheckBox.TabIndex = 2;
+            this.delTextCheckBox.Text = "Wyczyść po wysłaniu";
+            this.delTextCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // sendTextBox
+            // 
+            this.sendTextBox.Location = new System.Drawing.Point(0, 0);
+            this.sendTextBox.Name = "sendTextBox";
+            this.sendTextBox.Size = new System.Drawing.Size(321, 20);
+            this.sendTextBox.TabIndex = 0;
+            this.sendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendTextBox_KeyPress);
+            // 
+            // sendButton
+            // 
+            this.sendButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.sendButton.Location = new System.Drawing.Point(462, 0);
+            this.sendButton.Name = "sendButton";
+            this.sendButton.Size = new System.Drawing.Size(75, 22);
+            this.sendButton.TabIndex = 1;
+            this.sendButton.Text = "Wyślij";
+            this.sendButton.UseVisualStyleBackColor = true;
+            this.sendButton.Click += new System.EventHandler(this.send_Design);
             // 
             // MainForm
             // 
@@ -497,23 +513,23 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.leftPanel.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.mainSplitContainer.Panel1.ResumeLayout(false);
             this.mainSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).EndInit();
             this.mainSplitContainer.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.readSplitContainer.Panel1.ResumeLayout(false);
             this.readSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.readSplitContainer)).EndInit();
             this.readSplitContainer.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.writeSplitContainer.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.writeSplitContainer)).EndInit();
             this.writeSplitContainer.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -555,6 +571,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox sendTextBox;
         private System.Windows.Forms.Button sendButton;
+        private System.Windows.Forms.CheckBox delTextCheckBox;
     }
 }
 
