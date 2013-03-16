@@ -20,7 +20,9 @@ namespace IWSK_RS232
         private Parser parser = new Parser();
         Stopwatch pingWatch = new Stopwatch();
         List<byte> pingList = new List<byte>();
-        byte[] pingArr = new byte[] { 10, 20, 30, 40, 54 };
+        List<byte> pongList = new List<byte>();
+        byte[] pongArr = new byte[] { 80, 79, 78, 71 };
+        byte[] pingArr = new byte[] { 80, 73, 78, 71 };
         bool connectedDuePing = false;
 
         public MainForm()
@@ -131,11 +133,11 @@ namespace IWSK_RS232
             }
         }
 
-        private bool IsPingData()
+        private bool IsPongData()
         {
-            for (int i = 0; i < pingList.Count; i++)
+            for (int i = 0; i < pongArr.Length; i++)
             {
-                if (pingList[i] != pingArr[i])
+                if (pongList[i] != pongArr[i])
                 {
                     return false;
                 }
@@ -144,20 +146,42 @@ namespace IWSK_RS232
             return true;
         }
 
+        private void TerminatePing(byte[] data)
+        {
+            foreach (var b in data)
+            {
+                pingList.Add(b);
+
+                if (b == pingArr[pingList.Count - 1])
+                {
+                    if (pingList.Count == pingArr.Length)
+                    {
+                        rsPort.Send(pongArr, true);
+                    }
+                }
+                else
+                {
+                    pingList.Clear();
+                }
+            }
+        }
+
         private void rsPort_DataReceived(object sender, EventArgs e)
         {
             byte[] data = rsPort.GetReadBytes().ToArray();
 
+            TerminatePing(data);
+
             if (pingWatch.IsRunning)
             {
-                pingList.AddRange(data.Take(pingArr.Length));
+                pongList.AddRange(data.Take(pongArr.Length - pongList.Count));
 
-                if (pingList.Count == pingArr.Length)
+                if (pongList.Count == pongArr.Length)
                 {
-                    if (IsPingData())
+                    if (IsPongData())
                     {
                         logger.LogMessage("PING: " + pingWatch.Elapsed);
-                        data = data.Skip(pingList.Count).Take(data.Length - pingList.Count).ToArray();
+                        data = data.Skip(pongList.Count).Take(data.Length - pongList.Count).ToArray();
                     }
                     else
                     {
@@ -270,7 +294,7 @@ namespace IWSK_RS232
                 logger.LogMessage("PING: Timeout");
 
             pingWatch.Stop();
-            pingList.Clear();
+            pongList.Clear();
 
             InvokeOrNot(() => pingButton.Enabled = true, pingButton);
 
@@ -283,6 +307,16 @@ namespace IWSK_RS232
         private void pingTimer_Tick(object sender, EventArgs e)
         {
             PingStop(true);
+        }
+
+        private void crButton_Click(object sender, EventArgs e)
+        {
+            terminatorTextBox.Text += "\\r";
+        }
+
+        private void lfButton_Click(object sender, EventArgs e)
+        {
+            terminatorTextBox.Text += "\\n";
         }
     }
 }
