@@ -80,6 +80,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.transactionCheckBox = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.dtrCheckBox = new System.Windows.Forms.CheckBox();
+            this.rtsCheckBox = new System.Windows.Forms.CheckBox();
+            this.dsrCheckBox = new System.Windows.Forms.CheckBox();
+            this.ctsCheckBox = new System.Windows.Forms.CheckBox();
             this.gro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.leftPanel.SuspendLayout();
@@ -96,6 +101,7 @@
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // gro
@@ -294,9 +300,9 @@
             this.groupBox1.Controls.Add(this.crButton);
             this.groupBox1.Controls.Add(this.setTerminatorButton);
             this.groupBox1.Controls.Add(this.terminatorTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(3, 234);
+            this.groupBox1.Location = new System.Drawing.Point(3, 363);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(207, 79);
+            this.groupBox1.Size = new System.Drawing.Size(207, 71);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Terminator";
@@ -320,6 +326,7 @@
             // 
             // leftPanel
             // 
+            this.leftPanel.Controls.Add(this.groupBox6);
             this.leftPanel.Controls.Add(this.groupBox5);
             this.leftPanel.Controls.Add(this.groupBox4);
             this.leftPanel.Controls.Add(this.gro);
@@ -335,7 +342,7 @@
             this.groupBox4.Controls.Add(this.decReadRadioButton);
             this.groupBox4.Controls.Add(this.asciiReadRadioButton);
             this.groupBox4.Controls.Add(this.hexReadradioButton);
-            this.groupBox4.Location = new System.Drawing.Point(3, 319);
+            this.groupBox4.Location = new System.Drawing.Point(3, 317);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(207, 40);
             this.groupBox4.TabIndex = 2;
@@ -588,7 +595,7 @@
             this.groupBox5.Controls.Add(this.label7);
             this.groupBox5.Controls.Add(this.pingButton);
             this.groupBox5.Controls.Add(this.pingTimeOutTextBox);
-            this.groupBox5.Location = new System.Drawing.Point(3, 364);
+            this.groupBox5.Location = new System.Drawing.Point(3, 234);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(209, 77);
             this.groupBox5.TabIndex = 3;
@@ -664,6 +671,63 @@
             this.transactionCheckBox.Text = "Wyślij w transakcji";
             this.transactionCheckBox.UseVisualStyleBackColor = true;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.ctsCheckBox);
+            this.groupBox6.Controls.Add(this.dsrCheckBox);
+            this.groupBox6.Controls.Add(this.rtsCheckBox);
+            this.groupBox6.Controls.Add(this.dtrCheckBox);
+            this.groupBox6.Location = new System.Drawing.Point(3, 440);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(209, 70);
+            this.groupBox6.TabIndex = 4;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Ręczne sterowanie";
+            // 
+            // dtrCheckBox
+            // 
+            this.dtrCheckBox.AutoSize = true;
+            this.dtrCheckBox.Location = new System.Drawing.Point(35, 19);
+            this.dtrCheckBox.Name = "dtrCheckBox";
+            this.dtrCheckBox.Size = new System.Drawing.Size(49, 17);
+            this.dtrCheckBox.TabIndex = 0;
+            this.dtrCheckBox.Text = "DTR";
+            this.dtrCheckBox.UseVisualStyleBackColor = true;
+            this.dtrCheckBox.CheckedChanged += new System.EventHandler(this.dtrCheckBox_CheckedChanged);
+            // 
+            // rtsCheckBox
+            // 
+            this.rtsCheckBox.AutoSize = true;
+            this.rtsCheckBox.Location = new System.Drawing.Point(127, 18);
+            this.rtsCheckBox.Name = "rtsCheckBox";
+            this.rtsCheckBox.Size = new System.Drawing.Size(48, 17);
+            this.rtsCheckBox.TabIndex = 1;
+            this.rtsCheckBox.Text = "RTS";
+            this.rtsCheckBox.UseVisualStyleBackColor = true;
+            this.rtsCheckBox.CheckedChanged += new System.EventHandler(this.rtsCheckBox_CheckedChanged);
+            // 
+            // dsrCheckBox
+            // 
+            this.dsrCheckBox.AutoSize = true;
+            this.dsrCheckBox.Enabled = false;
+            this.dsrCheckBox.Location = new System.Drawing.Point(35, 42);
+            this.dsrCheckBox.Name = "dsrCheckBox";
+            this.dsrCheckBox.Size = new System.Drawing.Size(49, 17);
+            this.dsrCheckBox.TabIndex = 2;
+            this.dsrCheckBox.Text = "DSR";
+            this.dsrCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ctsCheckBox
+            // 
+            this.ctsCheckBox.AutoSize = true;
+            this.ctsCheckBox.Enabled = false;
+            this.ctsCheckBox.Location = new System.Drawing.Point(127, 42);
+            this.ctsCheckBox.Name = "ctsCheckBox";
+            this.ctsCheckBox.Size = new System.Drawing.Size(47, 17);
+            this.ctsCheckBox.TabIndex = 3;
+            this.ctsCheckBox.Text = "CTS";
+            this.ctsCheckBox.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -695,6 +759,8 @@
             this.panel1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -752,6 +818,11 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox transactionTextBox;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.CheckBox rtsCheckBox;
+        private System.Windows.Forms.CheckBox dtrCheckBox;
+        private System.Windows.Forms.CheckBox ctsCheckBox;
+        private System.Windows.Forms.CheckBox dsrCheckBox;
     }
 }
 

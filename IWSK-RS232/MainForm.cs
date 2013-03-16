@@ -24,12 +24,12 @@ namespace IWSK_RS232
         byte[] pongArr = new byte[] { 80, 79, 78, 71 };
         byte[] pingArr = new byte[] { 80, 73, 78, 71 };
         bool connectedDuePing = false;
-
+        
         public MainForm()
         {
             InitializeComponent();
 
-            rsPort.Connected += spPort_Connected;
+            rsPort.Connected += rsPort_Connected;
             rsPort.Disconnected += rsPort_Disconnected;
             rsPort.DataReceived += rsPort_DataReceived;
             rsPort.DataSent += rsPort_DataSent;
@@ -97,7 +97,7 @@ namespace IWSK_RS232
                 logger.LogMessage("Nie można zamknąć portu.");
         }
 
-        private void spPort_Connected(object sender, EventArgs e)
+        private void rsPort_Connected(object sender, EventArgs e)
         {
             connectButton.Text = "Rozłącz";
             connectButton.Click -= connectButton_Click;
@@ -363,6 +363,16 @@ namespace IWSK_RS232
 
             if (rb != null && rb.Checked)
                 dataFormat = (DataFormat)Convert.ToInt32(rb.Tag);
+        }
+
+        private void dtrCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            rsPort.DTREnable = dtrCheckBox.Checked;
+        }
+
+        private void rtsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            rsPort.RTSEnable = rtsCheckBox.Checked;
         }
     }
 }

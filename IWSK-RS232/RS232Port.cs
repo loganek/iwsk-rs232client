@@ -54,8 +54,10 @@ namespace IWSK_RS232
         private static Parity[] parityArray = { Parity.None, Parity.Even, Parity.Odd/*, Parity.Mark, Parity.Space*/ };
         private static StopBits[] stopBitsArray = { StopBits.One, /*StopBits.OnePointFive,*/ StopBits.Two };
         private List<byte> readBytes = new List<byte>();
-        System.Windows.Forms.Timer transactionTimer = new System.Windows.Forms.Timer();
-        bool isTransaction = false;
+        private System.Windows.Forms.Timer transactionTimer = new System.Windows.Forms.Timer();
+        private bool isTransaction = false;
+        private bool dtrEnable = false;
+        private bool rtsEnable = false;
 
         public RS232Port()
         {
@@ -93,6 +95,8 @@ namespace IWSK_RS232
                 if (!serialPort.IsOpen)
                     return false;
 
+                serialPort.DtrEnable = DTREnable;
+                serialPort.RtsEnable = RTSEnable;
                 OnConnected(EventArgs.Empty);
                 return true;
             }
@@ -188,6 +192,36 @@ namespace IWSK_RS232
         {
             get;
             private set;
+        }
+
+        public bool RTSEnable
+        {
+            set
+            {
+                rtsEnable = value;
+                serialPort.RtsEnable = rtsEnable;
+            }
+            get { return rtsEnable; }
+        }
+
+        public bool DTREnable
+        {
+            set
+            {
+                dtrEnable = value;
+                serialPort.DtrEnable = dtrEnable;
+            }
+            get { return dtrEnable; }
+        }
+
+        public bool DSR
+        {
+            get {  return IsOpen && serialPort.DsrHolding; }
+        }
+
+        public bool CTS
+        {
+            get { return IsOpen && serialPort.CtsHolding; }
         }
 
         public static Parity ParityArray(int index)
