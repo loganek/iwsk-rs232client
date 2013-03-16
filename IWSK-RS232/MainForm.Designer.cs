@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gro = new System.Windows.Forms.GroupBox();
             this.pingButton = new System.Windows.Forms.Button();
             this.rescanPortsButton = new System.Windows.Forms.Button();
@@ -69,6 +70,11 @@
             this.fileRadioButton = new System.Windows.Forms.RadioButton();
             this.loadFileButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.pingTimeOutTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.pingTimer = new System.Windows.Forms.Timer(this.components);
             this.gro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.leftPanel.SuspendLayout();
@@ -87,11 +93,11 @@
             this.writeSplitContainer.Panel1.SuspendLayout();
             this.writeSplitContainer.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // gro
             // 
-            this.gro.Controls.Add(this.pingButton);
             this.gro.Controls.Add(this.rescanPortsButton);
             this.gro.Controls.Add(this.connectButton);
             this.gro.Controls.Add(this.flowControlComboBox);
@@ -108,16 +114,16 @@
             this.gro.Controls.Add(this.portComboBox);
             this.gro.Location = new System.Drawing.Point(3, 3);
             this.gro.Name = "gro";
-            this.gro.Size = new System.Drawing.Size(210, 249);
+            this.gro.Size = new System.Drawing.Size(210, 225);
             this.gro.TabIndex = 0;
             this.gro.TabStop = false;
             this.gro.Text = "Konfiguracja połączenia";
             // 
             // pingButton
             // 
-            this.pingButton.Location = new System.Drawing.Point(6, 215);
+            this.pingButton.Location = new System.Drawing.Point(6, 48);
             this.pingButton.Name = "pingButton";
-            this.pingButton.Size = new System.Drawing.Size(201, 23);
+            this.pingButton.Size = new System.Drawing.Size(193, 23);
             this.pingButton.TabIndex = 2;
             this.pingButton.Text = "PING";
             this.pingButton.UseVisualStyleBackColor = true;
@@ -284,7 +290,7 @@
             // 
             this.groupBox1.Controls.Add(this.setTerminatorButton);
             this.groupBox1.Controls.Add(this.terminatorTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(3, 258);
+            this.groupBox1.Location = new System.Drawing.Point(3, 234);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(207, 51);
             this.groupBox1.TabIndex = 1;
@@ -310,6 +316,7 @@
             // 
             // leftPanel
             // 
+            this.leftPanel.Controls.Add(this.groupBox5);
             this.leftPanel.Controls.Add(this.groupBox4);
             this.leftPanel.Controls.Add(this.gro);
             this.leftPanel.Controls.Add(this.groupBox1);
@@ -324,7 +331,7 @@
             this.groupBox4.Controls.Add(this.decReadRadioButton);
             this.groupBox4.Controls.Add(this.asciiReadRadioButton);
             this.groupBox4.Controls.Add(this.hexReadradioButton);
-            this.groupBox4.Location = new System.Drawing.Point(3, 315);
+            this.groupBox4.Location = new System.Drawing.Point(3, 291);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(207, 40);
             this.groupBox4.TabIndex = 2;
@@ -557,6 +564,49 @@
             this.loadFileButton.UseVisualStyleBackColor = true;
             this.loadFileButton.Click += new System.EventHandler(this.loadFileButton_Click);
             // 
+            // pingTimeOutTextBox
+            // 
+            this.pingTimeOutTextBox.Location = new System.Drawing.Point(57, 21);
+            this.pingTimeOutTextBox.Name = "pingTimeOutTextBox";
+            this.pingTimeOutTextBox.Size = new System.Drawing.Size(111, 20);
+            this.pingTimeOutTextBox.TabIndex = 14;
+            this.pingTimeOutTextBox.Text = "100";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(48, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Timeout:";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label8);
+            this.groupBox5.Controls.Add(this.label7);
+            this.groupBox5.Controls.Add(this.pingButton);
+            this.groupBox5.Controls.Add(this.pingTimeOutTextBox);
+            this.groupBox5.Location = new System.Drawing.Point(3, 336);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(209, 77);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "PING";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(174, 24);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(20, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "ms";
+            // 
+            // pingTimer
+            // 
+            this.pingTimer.Tick += new System.EventHandler(this.pingTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -589,6 +639,8 @@
             this.writeSplitContainer.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -636,6 +688,11 @@
         private System.Windows.Forms.RadioButton textRadioButton;
         private System.Windows.Forms.TextBox filePathTextBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox pingTimeOutTextBox;
+        private System.Windows.Forms.Timer pingTimer;
     }
 }
 

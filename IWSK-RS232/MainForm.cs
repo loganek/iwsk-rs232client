@@ -163,23 +163,17 @@ namespace IWSK_RS232
                     {
                         logger.LogMessage("PING: " + pingWatch.Elapsed + "\nNiepoprawne dane.");
                     }
-                    pingWatch.Stop();
-                    pingList.Clear();
 
-                    InvokeOrNot(() => pingButton.Enabled = true, pingButton);
-                    
-                    if (connectedDuePing)
-                    {
-                        disconnectButton_Click(null, e);
-                    }
+                    PingStop();
                 }
             }
 
-            InvokeOrNot(() =>
-            {
-                readRawDataRichTextBox.AppendText(StringParser.ByteToDisplay(data));
-                parser.AppendToParser(data);
-            }, readRawDataRichTextBox);
+            if (!connectedDuePing)
+                InvokeOrNot(() =>
+                {
+                    readRawDataRichTextBox.AppendText(StringParser.ByteToDisplay(data));
+                    parser.AppendToParser(data);
+                }, readRawDataRichTextBox);
         }
 
         private void send_Design(object sender, EventArgs e)
@@ -246,6 +240,17 @@ namespace IWSK_RS232
             }
 
             pingWatch.Start();
+            int interval;
+
+            if (int.TryParse(pingTimeOutTextBox.Text, out interval))
+            {
+                pingTimer.Interval = interval;
+            }
+            else 
+            {
+                pingTimeOutTextBox.Text = (pingTimer.Interval = 100).ToString();
+            }
+            pingTimer.Start();
             pingButton.Enabled = false;
         }
 
@@ -255,6 +260,29 @@ namespace IWSK_RS232
             {
                 filePathTextBox.Text = openFileDialog.FileName;
             }
+        }
+
+        private void PingStop(bool timeout = false)
+        {
+            pingTimer.Stop();
+
+            if(timeout)
+                logger.LogMessage("PING: Timeout");
+
+            pingWatch.Stop();
+            pingList.Clear();
+
+            InvokeOrNot(() => pingButton.Enabled = true, pingButton);
+
+            if (connectedDuePing)
+            {
+                disconnectButton_Click(null, null);
+            }
+        }
+
+        private void pingTimer_Tick(object sender, EventArgs e)
+        {
+            PingStop(true);
         }
     }
 }
