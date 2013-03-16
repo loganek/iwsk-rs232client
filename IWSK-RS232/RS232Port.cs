@@ -100,7 +100,7 @@ namespace IWSK_RS232
             return true;
         }
 
-        public bool Send(byte[] buf)
+        public bool Send(byte[] buf, bool unsafeMode = false)
         {
             if (buf == null)
                 return true;
@@ -108,7 +108,12 @@ namespace IWSK_RS232
             try
             {
                 serialPort.Write(buf, 0, buf.Length);
-                OnDataSent(new SentEventArgs(buf));
+
+                if (!unsafeMode)
+                {
+                    OnDataSent(new SentEventArgs(buf));
+                }
+
                 return true;
             }
             catch (Exception ex)
@@ -166,25 +171,25 @@ namespace IWSK_RS232
         public event EventHandler DataReceived;
         public event DataSentEventHandler DataSent;
 
-        protected virtual void OnConnected(EventArgs e)
+        private void OnConnected(EventArgs e)
         {
             if (Connected != null)
                 Connected(this, e);
         }
 
-        protected virtual void OnDisconnected(EventArgs e)
+        private void OnDisconnected(EventArgs e)
         {
             if (Disconnected != null)
                 Disconnected(this, e);
         }
 
-        protected virtual void OnDataReceived(EventArgs e)
+        private void OnDataReceived(EventArgs e)
         {
             if (DataReceived != null)
                 DataReceived(this, e);
         }
 
-        protected virtual void OnDataSent(SentEventArgs e)
+        private void OnDataSent(SentEventArgs e)
         {
             if (DataSent != null)
                 DataSent(this, e);

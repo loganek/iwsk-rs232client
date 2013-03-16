@@ -64,6 +64,11 @@
             this.delTextCheckBox = new System.Windows.Forms.CheckBox();
             this.sendTextBox = new System.Windows.Forms.TextBox();
             this.sendButton = new System.Windows.Forms.Button();
+            this.filePathTextBox = new System.Windows.Forms.TextBox();
+            this.textRadioButton = new System.Windows.Forms.RadioButton();
+            this.fileRadioButton = new System.Windows.Forms.RadioButton();
+            this.loadFileButton = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.gro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.leftPanel.SuspendLayout();
@@ -116,6 +121,7 @@
             this.pingButton.TabIndex = 2;
             this.pingButton.Text = "PING";
             this.pingButton.UseVisualStyleBackColor = true;
+            this.pingButton.Click += new System.EventHandler(this.pingButton_Click);
             // 
             // rescanPortsButton
             // 
@@ -293,6 +299,7 @@
             this.setTerminatorButton.TabIndex = 1;
             this.setTerminatorButton.Text = "Ustaw";
             this.setTerminatorButton.UseVisualStyleBackColor = true;
+            this.setTerminatorButton.Click += new System.EventHandler(this.setTerminatorButton_Click);
             // 
             // terminatorTextBox
             // 
@@ -370,7 +377,7 @@
             // mainSplitContainer.Panel2
             // 
             this.mainSplitContainer.Panel2.Controls.Add(this.groupBox3);
-            this.mainSplitContainer.Size = new System.Drawing.Size(543, 441);
+            this.mainSplitContainer.Size = new System.Drawing.Size(625, 441);
             this.mainSplitContainer.SplitterDistance = 228;
             this.mainSplitContainer.TabIndex = 3;
             // 
@@ -380,7 +387,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(543, 228);
+            this.groupBox2.Size = new System.Drawing.Size(625, 228);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Odbiór danych";
@@ -398,8 +405,8 @@
             // readSplitContainer.Panel2
             // 
             this.readSplitContainer.Panel2.Controls.Add(this.readFrameListBox);
-            this.readSplitContainer.Size = new System.Drawing.Size(537, 209);
-            this.readSplitContainer.SplitterDistance = 264;
+            this.readSplitContainer.Size = new System.Drawing.Size(619, 209);
+            this.readSplitContainer.SplitterDistance = 304;
             this.readSplitContainer.TabIndex = 0;
             // 
             // readRawDataRichTextBox
@@ -408,7 +415,7 @@
             this.readRawDataRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.readRawDataRichTextBox.Name = "readRawDataRichTextBox";
             this.readRawDataRichTextBox.ReadOnly = true;
-            this.readRawDataRichTextBox.Size = new System.Drawing.Size(264, 209);
+            this.readRawDataRichTextBox.Size = new System.Drawing.Size(304, 209);
             this.readRawDataRichTextBox.TabIndex = 0;
             this.readRawDataRichTextBox.Text = "";
             // 
@@ -418,7 +425,7 @@
             this.readFrameListBox.FormattingEnabled = true;
             this.readFrameListBox.Location = new System.Drawing.Point(0, 0);
             this.readFrameListBox.Name = "readFrameListBox";
-            this.readFrameListBox.Size = new System.Drawing.Size(269, 209);
+            this.readFrameListBox.Size = new System.Drawing.Size(311, 209);
             this.readFrameListBox.TabIndex = 0;
             // 
             // groupBox3
@@ -428,7 +435,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(543, 209);
+            this.groupBox3.Size = new System.Drawing.Size(625, 209);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Wysyłanie danych";
@@ -442,8 +449,8 @@
             // writeSplitContainer.Panel1
             // 
             this.writeSplitContainer.Panel1.Controls.Add(this.writeRawDataRichTextBox);
-            this.writeSplitContainer.Size = new System.Drawing.Size(537, 168);
-            this.writeSplitContainer.SplitterDistance = 267;
+            this.writeSplitContainer.Size = new System.Drawing.Size(619, 145);
+            this.writeSplitContainer.SplitterDistance = 307;
             this.writeSplitContainer.TabIndex = 1;
             // 
             // writeRawDataRichTextBox
@@ -452,27 +459,32 @@
             this.writeRawDataRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.writeRawDataRichTextBox.Name = "writeRawDataRichTextBox";
             this.writeRawDataRichTextBox.ReadOnly = true;
-            this.writeRawDataRichTextBox.Size = new System.Drawing.Size(267, 168);
+            this.writeRawDataRichTextBox.Size = new System.Drawing.Size(307, 145);
             this.writeRawDataRichTextBox.TabIndex = 1;
             this.writeRawDataRichTextBox.Text = "";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.loadFileButton);
+            this.panel1.Controls.Add(this.fileRadioButton);
+            this.panel1.Controls.Add(this.textRadioButton);
+            this.panel1.Controls.Add(this.filePathTextBox);
             this.panel1.Controls.Add(this.delTextCheckBox);
             this.panel1.Controls.Add(this.sendTextBox);
             this.panel1.Controls.Add(this.sendButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 184);
+            this.panel1.Location = new System.Drawing.Point(3, 161);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(537, 22);
+            this.panel1.Size = new System.Drawing.Size(619, 45);
             this.panel1.TabIndex = 0;
             // 
             // delTextCheckBox
             // 
+            this.delTextCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.delTextCheckBox.AutoSize = true;
             this.delTextCheckBox.Checked = true;
             this.delTextCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.delTextCheckBox.Location = new System.Drawing.Point(327, 3);
+            this.delTextCheckBox.Location = new System.Drawing.Point(321, 2);
             this.delTextCheckBox.Name = "delTextCheckBox";
             this.delTextCheckBox.Size = new System.Drawing.Size(129, 17);
             this.delTextCheckBox.TabIndex = 2;
@@ -481,28 +493,75 @@
             // 
             // sendTextBox
             // 
+            this.sendTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.sendTextBox.Location = new System.Drawing.Point(0, 0);
             this.sendTextBox.Name = "sendTextBox";
-            this.sendTextBox.Size = new System.Drawing.Size(321, 20);
+            this.sendTextBox.Size = new System.Drawing.Size(315, 20);
             this.sendTextBox.TabIndex = 0;
             this.sendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendTextBox_KeyPress);
             // 
             // sendButton
             // 
             this.sendButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.sendButton.Location = new System.Drawing.Point(462, 0);
+            this.sendButton.Enabled = false;
+            this.sendButton.Location = new System.Drawing.Point(544, 0);
             this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(75, 22);
+            this.sendButton.Size = new System.Drawing.Size(75, 45);
             this.sendButton.TabIndex = 1;
             this.sendButton.Text = "Wyślij";
             this.sendButton.UseVisualStyleBackColor = true;
             this.sendButton.Click += new System.EventHandler(this.send_Design);
             // 
+            // filePathTextBox
+            // 
+            this.filePathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.filePathTextBox.Location = new System.Drawing.Point(0, 22);
+            this.filePathTextBox.Name = "filePathTextBox";
+            this.filePathTextBox.Size = new System.Drawing.Size(315, 20);
+            this.filePathTextBox.TabIndex = 3;
+            // 
+            // textRadioButton
+            // 
+            this.textRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textRadioButton.AutoSize = true;
+            this.textRadioButton.Checked = true;
+            this.textRadioButton.Location = new System.Drawing.Point(462, 1);
+            this.textRadioButton.Name = "textRadioButton";
+            this.textRadioButton.Size = new System.Drawing.Size(76, 17);
+            this.textRadioButton.TabIndex = 4;
+            this.textRadioButton.TabStop = true;
+            this.textRadioButton.Text = "Pole edycji";
+            this.textRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // fileRadioButton
+            // 
+            this.fileRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fileRadioButton.AutoSize = true;
+            this.fileRadioButton.Location = new System.Drawing.Point(462, 24);
+            this.fileRadioButton.Name = "fileRadioButton";
+            this.fileRadioButton.Size = new System.Drawing.Size(42, 17);
+            this.fileRadioButton.TabIndex = 5;
+            this.fileRadioButton.Text = "Plik";
+            this.fileRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // loadFileButton
+            // 
+            this.loadFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadFileButton.Location = new System.Drawing.Point(321, 21);
+            this.loadFileButton.Name = "loadFileButton";
+            this.loadFileButton.Size = new System.Drawing.Size(129, 23);
+            this.loadFileButton.TabIndex = 6;
+            this.loadFileButton.Text = "Załaduj plik";
+            this.loadFileButton.UseVisualStyleBackColor = true;
+            this.loadFileButton.Click += new System.EventHandler(this.loadFileButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 441);
+            this.ClientSize = new System.Drawing.Size(843, 441);
             this.Controls.Add(this.mainSplitContainer);
             this.Controls.Add(this.leftPanel);
             this.Name = "MainForm";
@@ -572,6 +631,11 @@
         private System.Windows.Forms.TextBox sendTextBox;
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.CheckBox delTextCheckBox;
+        private System.Windows.Forms.Button loadFileButton;
+        private System.Windows.Forms.RadioButton fileRadioButton;
+        private System.Windows.Forms.RadioButton textRadioButton;
+        private System.Windows.Forms.TextBox filePathTextBox;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 
