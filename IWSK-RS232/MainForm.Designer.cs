@@ -59,7 +59,6 @@
             this.readRawDataRichTextBox = new System.Windows.Forms.RichTextBox();
             this.readFrameListBox = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.writeSplitContainer = new System.Windows.Forms.SplitContainer();
             this.writeRawDataRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.delTextCheckBox = new System.Windows.Forms.CheckBox();
@@ -77,6 +76,10 @@
             this.pingTimer = new System.Windows.Forms.Timer(this.components);
             this.crButton = new System.Windows.Forms.Button();
             this.lfButton = new System.Windows.Forms.Button();
+            this.transactionTextBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.transactionCheckBox = new System.Windows.Forms.CheckBox();
             this.gro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.leftPanel.SuspendLayout();
@@ -91,9 +94,6 @@
             this.readSplitContainer.Panel2.SuspendLayout();
             this.readSplitContainer.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.writeSplitContainer)).BeginInit();
-            this.writeSplitContainer.Panel1.SuspendLayout();
-            this.writeSplitContainer.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
@@ -327,7 +327,7 @@
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 0);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(218, 483);
+            this.leftPanel.Size = new System.Drawing.Size(218, 539);
             this.leftPanel.TabIndex = 2;
             // 
             // groupBox4
@@ -349,8 +349,10 @@
             this.decReadRadioButton.Name = "decReadRadioButton";
             this.decReadRadioButton.Size = new System.Drawing.Size(47, 17);
             this.decReadRadioButton.TabIndex = 2;
+            this.decReadRadioButton.Tag = "2";
             this.decReadRadioButton.Text = "DEC";
             this.decReadRadioButton.UseVisualStyleBackColor = true;
+            this.decReadRadioButton.CheckedChanged += new System.EventHandler(this.asciiReadRadioButton_CheckedChanged);
             // 
             // asciiReadRadioButton
             // 
@@ -361,8 +363,10 @@
             this.asciiReadRadioButton.Size = new System.Drawing.Size(52, 17);
             this.asciiReadRadioButton.TabIndex = 0;
             this.asciiReadRadioButton.TabStop = true;
+            this.asciiReadRadioButton.Tag = "0";
             this.asciiReadRadioButton.Text = "ASCII";
             this.asciiReadRadioButton.UseVisualStyleBackColor = true;
+            this.asciiReadRadioButton.CheckedChanged += new System.EventHandler(this.asciiReadRadioButton_CheckedChanged);
             // 
             // hexReadradioButton
             // 
@@ -371,8 +375,10 @@
             this.hexReadradioButton.Name = "hexReadradioButton";
             this.hexReadradioButton.Size = new System.Drawing.Size(47, 17);
             this.hexReadradioButton.TabIndex = 1;
+            this.hexReadradioButton.Tag = "1";
             this.hexReadradioButton.Text = "HEX";
             this.hexReadradioButton.UseVisualStyleBackColor = true;
+            this.hexReadradioButton.CheckedChanged += new System.EventHandler(this.asciiReadRadioButton_CheckedChanged);
             // 
             // mainSplitContainer
             // 
@@ -388,8 +394,8 @@
             // mainSplitContainer.Panel2
             // 
             this.mainSplitContainer.Panel2.Controls.Add(this.groupBox3);
-            this.mainSplitContainer.Size = new System.Drawing.Size(636, 483);
-            this.mainSplitContainer.SplitterDistance = 249;
+            this.mainSplitContainer.Size = new System.Drawing.Size(648, 539);
+            this.mainSplitContainer.SplitterDistance = 278;
             this.mainSplitContainer.TabIndex = 3;
             // 
             // groupBox2
@@ -398,7 +404,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(636, 249);
+            this.groupBox2.Size = new System.Drawing.Size(648, 278);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Odbiór danych";
@@ -416,8 +422,8 @@
             // readSplitContainer.Panel2
             // 
             this.readSplitContainer.Panel2.Controls.Add(this.readFrameListBox);
-            this.readSplitContainer.Size = new System.Drawing.Size(630, 230);
-            this.readSplitContainer.SplitterDistance = 309;
+            this.readSplitContainer.Size = new System.Drawing.Size(642, 259);
+            this.readSplitContainer.SplitterDistance = 315;
             this.readSplitContainer.TabIndex = 0;
             // 
             // readRawDataRichTextBox
@@ -426,7 +432,7 @@
             this.readRawDataRichTextBox.Location = new System.Drawing.Point(0, 0);
             this.readRawDataRichTextBox.Name = "readRawDataRichTextBox";
             this.readRawDataRichTextBox.ReadOnly = true;
-            this.readRawDataRichTextBox.Size = new System.Drawing.Size(309, 230);
+            this.readRawDataRichTextBox.Size = new System.Drawing.Size(315, 259);
             this.readRawDataRichTextBox.TabIndex = 0;
             this.readRawDataRichTextBox.Text = "";
             // 
@@ -436,46 +442,37 @@
             this.readFrameListBox.FormattingEnabled = true;
             this.readFrameListBox.Location = new System.Drawing.Point(0, 0);
             this.readFrameListBox.Name = "readFrameListBox";
-            this.readFrameListBox.Size = new System.Drawing.Size(317, 230);
+            this.readFrameListBox.Size = new System.Drawing.Size(323, 259);
             this.readFrameListBox.TabIndex = 0;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.writeSplitContainer);
+            this.groupBox3.Controls.Add(this.writeRawDataRichTextBox);
             this.groupBox3.Controls.Add(this.panel1);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(636, 230);
+            this.groupBox3.Size = new System.Drawing.Size(648, 257);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Wysyłanie danych";
             // 
-            // writeSplitContainer
-            // 
-            this.writeSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.writeSplitContainer.Location = new System.Drawing.Point(3, 16);
-            this.writeSplitContainer.Name = "writeSplitContainer";
-            // 
-            // writeSplitContainer.Panel1
-            // 
-            this.writeSplitContainer.Panel1.Controls.Add(this.writeRawDataRichTextBox);
-            this.writeSplitContainer.Size = new System.Drawing.Size(630, 166);
-            this.writeSplitContainer.SplitterDistance = 313;
-            this.writeSplitContainer.TabIndex = 1;
-            // 
             // writeRawDataRichTextBox
             // 
             this.writeRawDataRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.writeRawDataRichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.writeRawDataRichTextBox.Location = new System.Drawing.Point(3, 16);
             this.writeRawDataRichTextBox.Name = "writeRawDataRichTextBox";
             this.writeRawDataRichTextBox.ReadOnly = true;
-            this.writeRawDataRichTextBox.Size = new System.Drawing.Size(313, 166);
+            this.writeRawDataRichTextBox.Size = new System.Drawing.Size(642, 170);
             this.writeRawDataRichTextBox.TabIndex = 1;
             this.writeRawDataRichTextBox.Text = "";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.transactionCheckBox);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.transactionTextBox);
             this.panel1.Controls.Add(this.loadFileButton);
             this.panel1.Controls.Add(this.fileRadioButton);
             this.panel1.Controls.Add(this.textRadioButton);
@@ -484,9 +481,9 @@
             this.panel1.Controls.Add(this.sendTextBox);
             this.panel1.Controls.Add(this.sendButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 182);
+            this.panel1.Location = new System.Drawing.Point(3, 186);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(630, 45);
+            this.panel1.Size = new System.Drawing.Size(642, 68);
             this.panel1.TabIndex = 0;
             // 
             // delTextCheckBox
@@ -495,7 +492,7 @@
             this.delTextCheckBox.AutoSize = true;
             this.delTextCheckBox.Checked = true;
             this.delTextCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.delTextCheckBox.Location = new System.Drawing.Point(332, 2);
+            this.delTextCheckBox.Location = new System.Drawing.Point(344, 2);
             this.delTextCheckBox.Name = "delTextCheckBox";
             this.delTextCheckBox.Size = new System.Drawing.Size(129, 17);
             this.delTextCheckBox.TabIndex = 2;
@@ -508,7 +505,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sendTextBox.Location = new System.Drawing.Point(0, 0);
             this.sendTextBox.Name = "sendTextBox";
-            this.sendTextBox.Size = new System.Drawing.Size(326, 20);
+            this.sendTextBox.Size = new System.Drawing.Size(338, 20);
             this.sendTextBox.TabIndex = 0;
             this.sendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendTextBox_KeyPress);
             // 
@@ -516,9 +513,9 @@
             // 
             this.sendButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.sendButton.Enabled = false;
-            this.sendButton.Location = new System.Drawing.Point(555, 0);
+            this.sendButton.Location = new System.Drawing.Point(567, 0);
             this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(75, 45);
+            this.sendButton.Size = new System.Drawing.Size(75, 68);
             this.sendButton.TabIndex = 1;
             this.sendButton.Text = "Wyślij";
             this.sendButton.UseVisualStyleBackColor = true;
@@ -530,7 +527,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.filePathTextBox.Location = new System.Drawing.Point(0, 22);
             this.filePathTextBox.Name = "filePathTextBox";
-            this.filePathTextBox.Size = new System.Drawing.Size(326, 20);
+            this.filePathTextBox.Size = new System.Drawing.Size(338, 20);
             this.filePathTextBox.TabIndex = 3;
             // 
             // textRadioButton
@@ -538,7 +535,7 @@
             this.textRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textRadioButton.AutoSize = true;
             this.textRadioButton.Checked = true;
-            this.textRadioButton.Location = new System.Drawing.Point(473, 1);
+            this.textRadioButton.Location = new System.Drawing.Point(485, 1);
             this.textRadioButton.Name = "textRadioButton";
             this.textRadioButton.Size = new System.Drawing.Size(76, 17);
             this.textRadioButton.TabIndex = 4;
@@ -550,7 +547,7 @@
             // 
             this.fileRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.fileRadioButton.AutoSize = true;
-            this.fileRadioButton.Location = new System.Drawing.Point(473, 24);
+            this.fileRadioButton.Location = new System.Drawing.Point(485, 24);
             this.fileRadioButton.Name = "fileRadioButton";
             this.fileRadioButton.Size = new System.Drawing.Size(42, 17);
             this.fileRadioButton.TabIndex = 5;
@@ -560,7 +557,7 @@
             // loadFileButton
             // 
             this.loadFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.loadFileButton.Location = new System.Drawing.Point(332, 21);
+            this.loadFileButton.Location = new System.Drawing.Point(344, 21);
             this.loadFileButton.Name = "loadFileButton";
             this.loadFileButton.Size = new System.Drawing.Size(129, 23);
             this.loadFileButton.TabIndex = 6;
@@ -631,11 +628,47 @@
             this.lfButton.UseVisualStyleBackColor = true;
             this.lfButton.Click += new System.EventHandler(this.lfButton_Click);
             // 
+            // transactionTextBox
+            // 
+            this.transactionTextBox.Location = new System.Drawing.Point(344, 45);
+            this.transactionTextBox.Name = "transactionTextBox";
+            this.transactionTextBox.Size = new System.Drawing.Size(79, 20);
+            this.transactionTextBox.TabIndex = 7;
+            this.transactionTextBox.Text = "100";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(238, 48);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(100, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Czas na transakcję:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(429, 48);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(20, 13);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "ms";
+            // 
+            // transactionCheckBox
+            // 
+            this.transactionCheckBox.AutoSize = true;
+            this.transactionCheckBox.Location = new System.Drawing.Point(455, 47);
+            this.transactionCheckBox.Name = "transactionCheckBox";
+            this.transactionCheckBox.Size = new System.Drawing.Size(112, 17);
+            this.transactionCheckBox.TabIndex = 10;
+            this.transactionCheckBox.Text = "Wyślij w transakcji";
+            this.transactionCheckBox.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 483);
+            this.ClientSize = new System.Drawing.Size(866, 539);
             this.Controls.Add(this.mainSplitContainer);
             this.Controls.Add(this.leftPanel);
             this.Name = "MainForm";
@@ -658,9 +691,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.readSplitContainer)).EndInit();
             this.readSplitContainer.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.writeSplitContainer.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.writeSplitContainer)).EndInit();
-            this.writeSplitContainer.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -701,7 +731,6 @@
         private System.Windows.Forms.RichTextBox readRawDataRichTextBox;
         private System.Windows.Forms.ListBox readFrameListBox;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.SplitContainer writeSplitContainer;
         private System.Windows.Forms.RichTextBox writeRawDataRichTextBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox sendTextBox;
@@ -719,6 +748,10 @@
         private System.Windows.Forms.Timer pingTimer;
         private System.Windows.Forms.Button lfButton;
         private System.Windows.Forms.Button crButton;
+        private System.Windows.Forms.CheckBox transactionCheckBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox transactionTextBox;
     }
 }
 

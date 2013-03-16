@@ -33,6 +33,7 @@ namespace IWSK_RS232
             rsPort.Disconnected += rsPort_Disconnected;
             rsPort.DataReceived += rsPort_DataReceived;
             rsPort.DataSent += rsPort_DataSent;
+            rsPort.TransactionFinished += (sender, e) => logger.LogMessage("Transakcja zakończona " + (e.TransactionResult ? "powodzeniem" : "niepowodzeniem"));
 
             parser.FrameParsed += parser_FrameParsed;
         }
@@ -200,14 +201,43 @@ namespace IWSK_RS232
                 }, readRawDataRichTextBox);
         }
 
+        private void InitTransaction()
+        {
+            if (rsPort.IsTransaction)
+            {
+                logger.LogMessage("Aktualnie wykonywana już jest transakcja, nie można wysłać danych jako transakcji.");
+                return;
+            }
+
+            int interval;
+
+            if (!int.TryParse(transactionTextBox.Text, out interval))
+            {
+                transactionTextBox.Text = (pingTimer.Interval = 100).ToString();
+            }
+
+            rsPort.SetTransaction(interval);
+        }
+
+
         private void send_Design(object sender, EventArgs e)
         {
             if (rsPort.IsOpen)
             {
+                bool bug = false;
+
                 if (textRadioButton.Checked)
                 {
-                    if (!rsPort.Send(StringParser.StrToByteArray(sendTextBox.Text)))
+                    List<byte> sendByte = new List<byte>(StringParser.StrToByteArray(sendTextBox.Text));
+
+                    if (parser.Terminator != null)
                     {
+                        sendByte.AddRange(parser.Terminator);
+                    }
+
+                    if (!rsPort.Send(sendByte.ToArray()))
+                    {
+                        bug = true;
                         logger.LogMessage("Nie można wysłać danych: " + rsPort.ErrorMessage);
                     }
                     else
@@ -220,13 +250,21 @@ namespace IWSK_RS232
                 {
                     try
                     {
-                        rsPort.Send(File.ReadAllBytes(filePathTextBox.Text), true);
+                        if (!rsPort.Send(File.ReadAllBytes(filePathTextBox.Text), true))
+                            throw new Exception(rsPort.ErrorMessage);
+
                         readRawDataRichTextBox.AppendText("\n *** Wysłano plik " + filePathTextBox.Text + " *** \n");
                     }
                     catch (Exception ex)
                     {
                         logger.LogMessage("Nie można wysłać pliku " + filePathTextBox.Text + "\n" + ex.Message);
+                        bug = true;
                     }
+                }
+
+                if (!bug && transactionCheckBox.Checked)
+                {
+                    InitTransaction();
                 }
             }
         }
@@ -317,6 +355,14 @@ namespace IWSK_RS232
         private void lfButton_Click(object sender, EventArgs e)
         {
             terminatorTextBox.Text += "\\n";
+        }
+
+        private void asciiReadRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+
+            if (rb != null && rb.Checked)
+                dataFormat = (DataFormat)Convert.ToInt32(rb.Tag);
         }
     }
 }

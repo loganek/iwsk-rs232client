@@ -17,6 +17,7 @@ namespace IWSK_RS232
         }
 
         public SentEventArgs(byte[] buff)
+            : base()
         {
             if (buff == null)
                 buffer = null;
@@ -28,7 +29,19 @@ namespace IWSK_RS232
         }
     }
 
+    class TransactionEventArgs : EventArgs
+    {
+        public bool TransactionResult { private set; get; }
+
+        public TransactionEventArgs(bool result)
+            : base()
+        {
+            TransactionResult = result;
+        }
+    }
+
     delegate void DataSentEventHandler(object sender, SentEventArgs e);
+    delegate void TransactionEventHandler(object sender, TransactionEventArgs e);
 
     class RS232Port 
     {
@@ -41,6 +54,17 @@ namespace IWSK_RS232
         private static Parity[] parityArray = { Parity.None, Parity.Even, Parity.Odd/*, Parity.Mark, Parity.Space*/ };
         private static StopBits[] stopBitsArray = { StopBits.One, /*StopBits.OnePointFive,*/ StopBits.Two };
         private List<byte> readBytes = new List<byte>();
+        System.Windows.Forms.Timer transactionTimer = new System.Windows.Forms.Timer();
+        bool isTransaction = false;
+
+        public RS232Port()
+        {
+            transactionTimer.Tick += (sender, e) => { 
+                transactionTimer.Stop(); 
+                OnTransactionFinished(new TransactionEventArgs(false)); 
+                isTransaction = false; 
+            };
+        }
 
         public void SetConnectionParameters(string portName, int baudRate, Parity parity = Parity.None, int dataBits = 8, StopBits stopBits = StopBits.None)
         {
@@ -131,6 +155,13 @@ namespace IWSK_RS232
             serialPort.Read(buffer, 0, toRead);
             readBytes.AddRange(buffer);
 
+            if (isTransaction)
+            {
+                transactionTimer.Stop();
+                isTransaction = false;
+                OnTransactionFinished(new TransactionEventArgs(true));
+            }
+
             OnDataReceived(EventArgs.Empty);
         }
 
@@ -146,6 +177,11 @@ namespace IWSK_RS232
         public bool IsOpen
         {
             get { return serialPort != null && serialPort.IsOpen; }
+        }
+
+        public bool IsTransaction
+        {
+            get { return isTransaction; }
         }
 
         public string ErrorMessage
@@ -169,6 +205,7 @@ namespace IWSK_RS232
         public event EventHandler Connected;
         public event EventHandler Disconnected;
         public event EventHandler DataReceived;
+        public event TransactionEventHandler TransactionFinished;
         public event DataSentEventHandler DataSent;
 
         private void OnConnected(EventArgs e)
@@ -194,6 +231,19 @@ namespace IWSK_RS232
             if (DataSent != null)
                 DataSent(this, e);
         }
+
+        private void OnTransactionFinished(TransactionEventArgs e)
+        {
+            if (TransactionFinished != null)
+                TransactionFinished(this, e);
+        }
 #endregion
+
+        public void SetTransaction(int interval)
+        {
+            transactionTimer.Interval = interval;
+            transactionTimer.Start();
+            isTransaction = true;
+        }
     }
 }
