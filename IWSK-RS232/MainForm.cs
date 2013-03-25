@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace IWSK_RS232
 {
@@ -34,7 +35,7 @@ namespace IWSK_RS232
             rsPort.DataReceived += rsPort_DataReceived;
             rsPort.DataSent += rsPort_DataSent;
             rsPort.TransactionFinished += (sender, e) => logger.LogMessage("Transakcja zakończona " + (e.TransactionResult ? "powodzeniem" : "niepowodzeniem"));
-
+            rsPort.PinChanged += (sender, e) => UpdatePins();
             parser.FrameParsed += parser_FrameParsed;
         }
 
@@ -102,6 +103,10 @@ namespace IWSK_RS232
             connectButton.Text = "Rozłącz";
             connectButton.Click -= connectButton_Click;
             connectButton.Click += disconnectButton_Click;
+            UpdatePins();
+            rtsCheckBox.Checked = rsPort.RTSEnable;
+            dtrCheckBox.Checked = rsPort.DTREnable;
+
             sendButton.Enabled = true;
         }
 
@@ -367,12 +372,34 @@ namespace IWSK_RS232
 
         private void dtrCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            rsPort.DTREnable = dtrCheckBox.Checked;
+            try
+            {
+                rsPort.DTREnable = dtrCheckBox.Checked;
+            }
+            catch (NullReferenceException)
+            {
+                if(dtrCheckBox.Checked)
+                    dtrCheckBox.Checked = false;
+            }
         }
 
         private void rtsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            rsPort.RTSEnable = rtsCheckBox.Checked;
+            try
+            {
+                rsPort.RTSEnable = rtsCheckBox.Checked;
+            }
+            catch (NullReferenceException)
+            {
+                if(rtsCheckBox.Checked)
+                    rtsCheckBox.Checked = false;
+            }
+        }
+
+        private void UpdatePins()
+        {
+            InvokeOrNot(() => dsrCheckBox.Checked = rsPort.DSR, dsrCheckBox);
+            InvokeOrNot(() => ctsCheckBox.Checked = rsPort.CTS, ctsCheckBox);
         }
     }
 }

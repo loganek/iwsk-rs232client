@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gro = new System.Windows.Forms.GroupBox();
-            this.pingButton = new System.Windows.Forms.Button();
             this.rescanPortsButton = new System.Windows.Forms.Button();
             this.connectButton = new System.Windows.Forms.Button();
             this.flowControlComboBox = new System.Windows.Forms.ComboBox();
@@ -45,10 +44,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.baudRateComboBox = new System.Windows.Forms.ComboBox();
             this.portComboBox = new System.Windows.Forms.ComboBox();
+            this.pingButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lfButton = new System.Windows.Forms.Button();
+            this.crButton = new System.Windows.Forms.Button();
             this.setTerminatorButton = new System.Windows.Forms.Button();
             this.terminatorTextBox = new System.Windows.Forms.TextBox();
             this.leftPanel = new System.Windows.Forms.Panel();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.ctsCheckBox = new System.Windows.Forms.CheckBox();
+            this.dsrCheckBox = new System.Windows.Forms.CheckBox();
+            this.rtsCheckBox = new System.Windows.Forms.CheckBox();
+            this.dtrCheckBox = new System.Windows.Forms.CheckBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.pingTimeOutTextBox = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.decReadRadioButton = new System.Windows.Forms.RadioButton();
             this.asciiReadRadioButton = new System.Windows.Forms.RadioButton();
@@ -61,33 +72,24 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.writeRawDataRichTextBox = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.transactionCheckBox = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.transactionTextBox = new System.Windows.Forms.TextBox();
+            this.loadFileButton = new System.Windows.Forms.Button();
+            this.fileRadioButton = new System.Windows.Forms.RadioButton();
+            this.textRadioButton = new System.Windows.Forms.RadioButton();
+            this.filePathTextBox = new System.Windows.Forms.TextBox();
             this.delTextCheckBox = new System.Windows.Forms.CheckBox();
             this.sendTextBox = new System.Windows.Forms.TextBox();
             this.sendButton = new System.Windows.Forms.Button();
-            this.filePathTextBox = new System.Windows.Forms.TextBox();
-            this.textRadioButton = new System.Windows.Forms.RadioButton();
-            this.fileRadioButton = new System.Windows.Forms.RadioButton();
-            this.loadFileButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.pingTimeOutTextBox = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.pingTimer = new System.Windows.Forms.Timer(this.components);
-            this.crButton = new System.Windows.Forms.Button();
-            this.lfButton = new System.Windows.Forms.Button();
-            this.transactionTextBox = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.transactionCheckBox = new System.Windows.Forms.CheckBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.dtrCheckBox = new System.Windows.Forms.CheckBox();
-            this.rtsCheckBox = new System.Windows.Forms.CheckBox();
-            this.dsrCheckBox = new System.Windows.Forms.CheckBox();
-            this.ctsCheckBox = new System.Windows.Forms.CheckBox();
             this.gro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.leftPanel.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
             this.mainSplitContainer.Panel1.SuspendLayout();
@@ -100,8 +102,6 @@
             this.readSplitContainer.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // gro
@@ -126,16 +126,6 @@
             this.gro.TabIndex = 0;
             this.gro.TabStop = false;
             this.gro.Text = "Konfiguracja połączenia";
-            // 
-            // pingButton
-            // 
-            this.pingButton.Location = new System.Drawing.Point(6, 48);
-            this.pingButton.Name = "pingButton";
-            this.pingButton.Size = new System.Drawing.Size(193, 23);
-            this.pingButton.TabIndex = 2;
-            this.pingButton.Text = "PING";
-            this.pingButton.UseVisualStyleBackColor = true;
-            this.pingButton.Click += new System.EventHandler(this.pingButton_Click);
             // 
             // rescanPortsButton
             // 
@@ -294,6 +284,16 @@
             this.portComboBox.Size = new System.Drawing.Size(65, 21);
             this.portComboBox.TabIndex = 0;
             // 
+            // pingButton
+            // 
+            this.pingButton.Location = new System.Drawing.Point(6, 48);
+            this.pingButton.Name = "pingButton";
+            this.pingButton.Size = new System.Drawing.Size(193, 23);
+            this.pingButton.TabIndex = 2;
+            this.pingButton.Text = "PING";
+            this.pingButton.UseVisualStyleBackColor = true;
+            this.pingButton.Click += new System.EventHandler(this.pingButton_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lfButton);
@@ -306,6 +306,26 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Terminator";
+            // 
+            // lfButton
+            // 
+            this.lfButton.Location = new System.Drawing.Point(106, 15);
+            this.lfButton.Name = "lfButton";
+            this.lfButton.Size = new System.Drawing.Size(96, 23);
+            this.lfButton.TabIndex = 3;
+            this.lfButton.Text = "LF";
+            this.lfButton.UseVisualStyleBackColor = true;
+            this.lfButton.Click += new System.EventHandler(this.lfButton_Click);
+            // 
+            // crButton
+            // 
+            this.crButton.Location = new System.Drawing.Point(9, 15);
+            this.crButton.Name = "crButton";
+            this.crButton.Size = new System.Drawing.Size(91, 23);
+            this.crButton.TabIndex = 2;
+            this.crButton.Text = "CR";
+            this.crButton.UseVisualStyleBackColor = true;
+            this.crButton.Click += new System.EventHandler(this.crButton_Click);
             // 
             // setTerminatorButton
             // 
@@ -336,6 +356,102 @@
             this.leftPanel.Name = "leftPanel";
             this.leftPanel.Size = new System.Drawing.Size(218, 539);
             this.leftPanel.TabIndex = 2;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.ctsCheckBox);
+            this.groupBox6.Controls.Add(this.dsrCheckBox);
+            this.groupBox6.Controls.Add(this.rtsCheckBox);
+            this.groupBox6.Controls.Add(this.dtrCheckBox);
+            this.groupBox6.Location = new System.Drawing.Point(3, 440);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(209, 70);
+            this.groupBox6.TabIndex = 4;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Ręczne sterowanie";
+            // 
+            // ctsCheckBox
+            // 
+            this.ctsCheckBox.AutoSize = true;
+            this.ctsCheckBox.Enabled = false;
+            this.ctsCheckBox.Location = new System.Drawing.Point(127, 42);
+            this.ctsCheckBox.Name = "ctsCheckBox";
+            this.ctsCheckBox.Size = new System.Drawing.Size(47, 17);
+            this.ctsCheckBox.TabIndex = 3;
+            this.ctsCheckBox.Text = "CTS";
+            this.ctsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // dsrCheckBox
+            // 
+            this.dsrCheckBox.AutoSize = true;
+            this.dsrCheckBox.Enabled = false;
+            this.dsrCheckBox.Location = new System.Drawing.Point(35, 42);
+            this.dsrCheckBox.Name = "dsrCheckBox";
+            this.dsrCheckBox.Size = new System.Drawing.Size(49, 17);
+            this.dsrCheckBox.TabIndex = 2;
+            this.dsrCheckBox.Text = "DSR";
+            this.dsrCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // rtsCheckBox
+            // 
+            this.rtsCheckBox.AutoSize = true;
+            this.rtsCheckBox.Location = new System.Drawing.Point(127, 18);
+            this.rtsCheckBox.Name = "rtsCheckBox";
+            this.rtsCheckBox.Size = new System.Drawing.Size(48, 17);
+            this.rtsCheckBox.TabIndex = 1;
+            this.rtsCheckBox.Text = "RTS";
+            this.rtsCheckBox.UseVisualStyleBackColor = true;
+            this.rtsCheckBox.CheckedChanged += new System.EventHandler(this.rtsCheckBox_CheckedChanged);
+            // 
+            // dtrCheckBox
+            // 
+            this.dtrCheckBox.AutoSize = true;
+            this.dtrCheckBox.Location = new System.Drawing.Point(35, 19);
+            this.dtrCheckBox.Name = "dtrCheckBox";
+            this.dtrCheckBox.Size = new System.Drawing.Size(49, 17);
+            this.dtrCheckBox.TabIndex = 0;
+            this.dtrCheckBox.Text = "DTR";
+            this.dtrCheckBox.UseVisualStyleBackColor = true;
+            this.dtrCheckBox.CheckedChanged += new System.EventHandler(this.dtrCheckBox_CheckedChanged);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label8);
+            this.groupBox5.Controls.Add(this.label7);
+            this.groupBox5.Controls.Add(this.pingButton);
+            this.groupBox5.Controls.Add(this.pingTimeOutTextBox);
+            this.groupBox5.Location = new System.Drawing.Point(3, 234);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(209, 77);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "PING";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(174, 24);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(20, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "ms";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(48, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Timeout:";
+            // 
+            // pingTimeOutTextBox
+            // 
+            this.pingTimeOutTextBox.Location = new System.Drawing.Point(57, 21);
+            this.pingTimeOutTextBox.Name = "pingTimeOutTextBox";
+            this.pingTimeOutTextBox.Size = new System.Drawing.Size(111, 20);
+            this.pingTimeOutTextBox.TabIndex = 14;
+            this.pingTimeOutTextBox.Text = "100";
             // 
             // groupBox4
             // 
@@ -493,6 +609,86 @@
             this.panel1.Size = new System.Drawing.Size(642, 68);
             this.panel1.TabIndex = 0;
             // 
+            // transactionCheckBox
+            // 
+            this.transactionCheckBox.AutoSize = true;
+            this.transactionCheckBox.Location = new System.Drawing.Point(455, 47);
+            this.transactionCheckBox.Name = "transactionCheckBox";
+            this.transactionCheckBox.Size = new System.Drawing.Size(112, 17);
+            this.transactionCheckBox.TabIndex = 10;
+            this.transactionCheckBox.Text = "Wyślij w transakcji";
+            this.transactionCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(429, 48);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(20, 13);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "ms";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(238, 48);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(100, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Czas na transakcję:";
+            // 
+            // transactionTextBox
+            // 
+            this.transactionTextBox.Location = new System.Drawing.Point(344, 45);
+            this.transactionTextBox.Name = "transactionTextBox";
+            this.transactionTextBox.Size = new System.Drawing.Size(79, 20);
+            this.transactionTextBox.TabIndex = 7;
+            this.transactionTextBox.Text = "100";
+            // 
+            // loadFileButton
+            // 
+            this.loadFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadFileButton.Location = new System.Drawing.Point(344, 21);
+            this.loadFileButton.Name = "loadFileButton";
+            this.loadFileButton.Size = new System.Drawing.Size(129, 23);
+            this.loadFileButton.TabIndex = 6;
+            this.loadFileButton.Text = "Załaduj plik";
+            this.loadFileButton.UseVisualStyleBackColor = true;
+            this.loadFileButton.Click += new System.EventHandler(this.loadFileButton_Click);
+            // 
+            // fileRadioButton
+            // 
+            this.fileRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fileRadioButton.AutoSize = true;
+            this.fileRadioButton.Location = new System.Drawing.Point(485, 24);
+            this.fileRadioButton.Name = "fileRadioButton";
+            this.fileRadioButton.Size = new System.Drawing.Size(42, 17);
+            this.fileRadioButton.TabIndex = 5;
+            this.fileRadioButton.Text = "Plik";
+            this.fileRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // textRadioButton
+            // 
+            this.textRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textRadioButton.AutoSize = true;
+            this.textRadioButton.Checked = true;
+            this.textRadioButton.Location = new System.Drawing.Point(485, 1);
+            this.textRadioButton.Name = "textRadioButton";
+            this.textRadioButton.Size = new System.Drawing.Size(76, 17);
+            this.textRadioButton.TabIndex = 4;
+            this.textRadioButton.TabStop = true;
+            this.textRadioButton.Text = "Pole edycji";
+            this.textRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // filePathTextBox
+            // 
+            this.filePathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.filePathTextBox.Location = new System.Drawing.Point(0, 22);
+            this.filePathTextBox.Name = "filePathTextBox";
+            this.filePathTextBox.Size = new System.Drawing.Size(338, 20);
+            this.filePathTextBox.TabIndex = 3;
+            // 
             // delTextCheckBox
             // 
             this.delTextCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -528,205 +724,9 @@
             this.sendButton.UseVisualStyleBackColor = true;
             this.sendButton.Click += new System.EventHandler(this.send_Design);
             // 
-            // filePathTextBox
-            // 
-            this.filePathTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.filePathTextBox.Location = new System.Drawing.Point(0, 22);
-            this.filePathTextBox.Name = "filePathTextBox";
-            this.filePathTextBox.Size = new System.Drawing.Size(338, 20);
-            this.filePathTextBox.TabIndex = 3;
-            // 
-            // textRadioButton
-            // 
-            this.textRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textRadioButton.AutoSize = true;
-            this.textRadioButton.Checked = true;
-            this.textRadioButton.Location = new System.Drawing.Point(485, 1);
-            this.textRadioButton.Name = "textRadioButton";
-            this.textRadioButton.Size = new System.Drawing.Size(76, 17);
-            this.textRadioButton.TabIndex = 4;
-            this.textRadioButton.TabStop = true;
-            this.textRadioButton.Text = "Pole edycji";
-            this.textRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // fileRadioButton
-            // 
-            this.fileRadioButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fileRadioButton.AutoSize = true;
-            this.fileRadioButton.Location = new System.Drawing.Point(485, 24);
-            this.fileRadioButton.Name = "fileRadioButton";
-            this.fileRadioButton.Size = new System.Drawing.Size(42, 17);
-            this.fileRadioButton.TabIndex = 5;
-            this.fileRadioButton.Text = "Plik";
-            this.fileRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // loadFileButton
-            // 
-            this.loadFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.loadFileButton.Location = new System.Drawing.Point(344, 21);
-            this.loadFileButton.Name = "loadFileButton";
-            this.loadFileButton.Size = new System.Drawing.Size(129, 23);
-            this.loadFileButton.TabIndex = 6;
-            this.loadFileButton.Text = "Załaduj plik";
-            this.loadFileButton.UseVisualStyleBackColor = true;
-            this.loadFileButton.Click += new System.EventHandler(this.loadFileButton_Click);
-            // 
-            // pingTimeOutTextBox
-            // 
-            this.pingTimeOutTextBox.Location = new System.Drawing.Point(57, 21);
-            this.pingTimeOutTextBox.Name = "pingTimeOutTextBox";
-            this.pingTimeOutTextBox.Size = new System.Drawing.Size(111, 20);
-            this.pingTimeOutTextBox.TabIndex = 14;
-            this.pingTimeOutTextBox.Text = "100";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 24);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(48, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Timeout:";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label8);
-            this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Controls.Add(this.pingButton);
-            this.groupBox5.Controls.Add(this.pingTimeOutTextBox);
-            this.groupBox5.Location = new System.Drawing.Point(3, 234);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(209, 77);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "PING";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(174, 24);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(20, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "ms";
-            // 
             // pingTimer
             // 
             this.pingTimer.Tick += new System.EventHandler(this.pingTimer_Tick);
-            // 
-            // crButton
-            // 
-            this.crButton.Location = new System.Drawing.Point(9, 15);
-            this.crButton.Name = "crButton";
-            this.crButton.Size = new System.Drawing.Size(91, 23);
-            this.crButton.TabIndex = 2;
-            this.crButton.Text = "CR";
-            this.crButton.UseVisualStyleBackColor = true;
-            this.crButton.Click += new System.EventHandler(this.crButton_Click);
-            // 
-            // lfButton
-            // 
-            this.lfButton.Location = new System.Drawing.Point(106, 15);
-            this.lfButton.Name = "lfButton";
-            this.lfButton.Size = new System.Drawing.Size(96, 23);
-            this.lfButton.TabIndex = 3;
-            this.lfButton.Text = "LF";
-            this.lfButton.UseVisualStyleBackColor = true;
-            this.lfButton.Click += new System.EventHandler(this.lfButton_Click);
-            // 
-            // transactionTextBox
-            // 
-            this.transactionTextBox.Location = new System.Drawing.Point(344, 45);
-            this.transactionTextBox.Name = "transactionTextBox";
-            this.transactionTextBox.Size = new System.Drawing.Size(79, 20);
-            this.transactionTextBox.TabIndex = 7;
-            this.transactionTextBox.Text = "100";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(238, 48);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(100, 13);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Czas na transakcję:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(429, 48);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(20, 13);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "ms";
-            // 
-            // transactionCheckBox
-            // 
-            this.transactionCheckBox.AutoSize = true;
-            this.transactionCheckBox.Location = new System.Drawing.Point(455, 47);
-            this.transactionCheckBox.Name = "transactionCheckBox";
-            this.transactionCheckBox.Size = new System.Drawing.Size(112, 17);
-            this.transactionCheckBox.TabIndex = 10;
-            this.transactionCheckBox.Text = "Wyślij w transakcji";
-            this.transactionCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.ctsCheckBox);
-            this.groupBox6.Controls.Add(this.dsrCheckBox);
-            this.groupBox6.Controls.Add(this.rtsCheckBox);
-            this.groupBox6.Controls.Add(this.dtrCheckBox);
-            this.groupBox6.Location = new System.Drawing.Point(3, 440);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(209, 70);
-            this.groupBox6.TabIndex = 4;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Ręczne sterowanie";
-            // 
-            // dtrCheckBox
-            // 
-            this.dtrCheckBox.AutoSize = true;
-            this.dtrCheckBox.Location = new System.Drawing.Point(35, 19);
-            this.dtrCheckBox.Name = "dtrCheckBox";
-            this.dtrCheckBox.Size = new System.Drawing.Size(49, 17);
-            this.dtrCheckBox.TabIndex = 0;
-            this.dtrCheckBox.Text = "DTR";
-            this.dtrCheckBox.UseVisualStyleBackColor = true;
-            this.dtrCheckBox.CheckedChanged += new System.EventHandler(this.dtrCheckBox_CheckedChanged);
-            // 
-            // rtsCheckBox
-            // 
-            this.rtsCheckBox.AutoSize = true;
-            this.rtsCheckBox.Location = new System.Drawing.Point(127, 18);
-            this.rtsCheckBox.Name = "rtsCheckBox";
-            this.rtsCheckBox.Size = new System.Drawing.Size(48, 17);
-            this.rtsCheckBox.TabIndex = 1;
-            this.rtsCheckBox.Text = "RTS";
-            this.rtsCheckBox.UseVisualStyleBackColor = true;
-            this.rtsCheckBox.CheckedChanged += new System.EventHandler(this.rtsCheckBox_CheckedChanged);
-            // 
-            // dsrCheckBox
-            // 
-            this.dsrCheckBox.AutoSize = true;
-            this.dsrCheckBox.Enabled = false;
-            this.dsrCheckBox.Location = new System.Drawing.Point(35, 42);
-            this.dsrCheckBox.Name = "dsrCheckBox";
-            this.dsrCheckBox.Size = new System.Drawing.Size(49, 17);
-            this.dsrCheckBox.TabIndex = 2;
-            this.dsrCheckBox.Text = "DSR";
-            this.dsrCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // ctsCheckBox
-            // 
-            this.ctsCheckBox.AutoSize = true;
-            this.ctsCheckBox.Enabled = false;
-            this.ctsCheckBox.Location = new System.Drawing.Point(127, 42);
-            this.ctsCheckBox.Name = "ctsCheckBox";
-            this.ctsCheckBox.Size = new System.Drawing.Size(47, 17);
-            this.ctsCheckBox.TabIndex = 3;
-            this.ctsCheckBox.Text = "CTS";
-            this.ctsCheckBox.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -743,6 +743,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.leftPanel.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.mainSplitContainer.Panel1.ResumeLayout(false);
@@ -757,10 +761,6 @@
             this.groupBox3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }

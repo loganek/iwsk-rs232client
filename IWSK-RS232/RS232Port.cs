@@ -84,6 +84,7 @@ namespace IWSK_RS232
 
             serialPort = new SerialPort(portName, baudRate, parity, dataBits, stopBits);
             serialPort.DataReceived += port_DataReceived;
+            serialPort.PinChanged += port_PinChanged;
 
             if (serialPort.IsOpen)
                 return true;
@@ -116,6 +117,7 @@ namespace IWSK_RS232
             {
                 serialPort.Close();
                 serialPort.DataReceived -= port_DataReceived;   // because of memory leaks
+                serialPort.PinChanged -= port_PinChanged;
             }
             catch (IOException ex)
             {
@@ -167,6 +169,11 @@ namespace IWSK_RS232
             }
 
             OnDataReceived(EventArgs.Empty);
+        }
+
+        public void port_PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            OnPinChanged(e);
         }
 
         public List<byte> GetReadBytes()
@@ -241,6 +248,7 @@ namespace IWSK_RS232
         public event EventHandler DataReceived;
         public event TransactionEventHandler TransactionFinished;
         public event DataSentEventHandler DataSent;
+        public event SerialPinChangedEventHandler PinChanged;
 
         private void OnConnected(EventArgs e)
         {
@@ -270,6 +278,12 @@ namespace IWSK_RS232
         {
             if (TransactionFinished != null)
                 TransactionFinished(this, e);
+        }
+
+        private void OnPinChanged(SerialPinChangedEventArgs e)
+        {
+            if (PinChanged != null)
+                PinChanged(this, e);
         }
 #endregion
 
